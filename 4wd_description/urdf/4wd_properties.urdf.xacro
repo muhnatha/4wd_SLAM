@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<robot name="4wd">
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <box size="30 30 30"/>
+            </geometry>
+        </visual>
+    </link>
+</robot>
