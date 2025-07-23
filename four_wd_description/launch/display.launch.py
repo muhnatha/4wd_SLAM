@@ -6,7 +6,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 def generate_launch_description():
     # define pkg_name and path
-    pkg_name = '4wd_description'
+    pkg_name = 'four_wd_description'
     file_subpath = 'urdf/4wd_properties.urdf.xacro'
 
     # define launch path
