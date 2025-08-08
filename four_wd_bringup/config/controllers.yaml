@@ -1,0 +1,63 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 10 # Hz
+
+    # Broadcaster to publish the state of all joints
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    # Differential drive controller for mobile base movement
+    diff_drive_controller:
+      type: diff_drive_controller/DiffDriveController
+
+# Parameters for the differential drive controller
+diff_drive_controller:
+  ros__parameters:
+    # Wheels name
+    left_wheel_names: ['front_left_wheel_joint', 'back_left_wheel_joint']
+    right_wheel_names: ['front_right_wheel_joint', 'back_right_wheel_joint']
+
+    # distance between left and right wheels.
+    wheel_separation: 0.34
+
+    # Number of wheels on each side.
+    wheels_per_side: 2
+
+    # Wheel radius is defined in the URDF properties.
+    wheel_radius: 0.05
+
+    # Frame IDs for odometry. These match the defaults and your URDF.
+    odom_frame_id: "odom"
+    base_frame_id: "base_link"
+
+    # Enable publishing the odom -> base_link transform.
+    enable_odom_tf: true
+
+    # Rate at which odometry and TF are published.
+    publish_rate: 50.0
+
+    # values for pose and twist (need Tune)
+    pose_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
+    twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
+
+    # limits velocity and accelaration
+    linear.x.has_velocity_limits: true
+    linear.x.has_acceleration_limits: true
+    angular.z.has_velocity_limits: true
+    angular.z.has_acceleration_limits: true
+
+    # Maximum velocity and acceleration.
+    linear.x.max_velocity: 1.0            # m/s
+    linear.x.min_velocity: -1.0           # m/s
+    linear.x.max_acceleration: 1.0        # m/s^2
+    linear.x.min_acceleration: -1.0       # m/s^2
+    angular.z.max_velocity: 1.57          # rad/s
+    angular.z.min_velocity: -1.57         # rad/s
+    angular.z.max_acceleration: 1.57      # rad/s^2
+    angular.z.min_acceleration: -1.57     # rad/s^2
+
+    # Timeout for command velocity messages.
+    cmd_vel_timeout: 0.5 # seconds
+
+    # Use the timestamp from the velocity command message.
+    use_stamped_vel: true

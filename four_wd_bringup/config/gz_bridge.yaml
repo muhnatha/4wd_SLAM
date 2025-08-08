@@ -1,0 +1,31 @@
+# Bridge configuration for the 4WD robot
+
+- ros_topic_name: "/scan"
+  gz_topic_name: "/scan"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+  direction: "GZ_TO_ROS"
+
+- ros_topic_name: "/front_left_wheel_joint_velocity_controller/commands"
+  gz_topic_name: "/model/4wd_robot/joint/front_left_wheel_joint/cmd_vel"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: "ROS_TO_GZ"
+
+- ros_topic_name: "/front_right_wheel_joint_velocity_controller/commands"
+  gz_topic_name: "/model/4wd_robot/joint/front_right_wheel_joint/cmd_vel"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: "ROS_TO_GZ"
+
+- ros_topic_name: "/back_left_wheel_joint_velocity_controller/commands"
+  gz_topic_name: "/model/4wd_robot/joint/back_left_wheel_joint/cmd_vel"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: "ROS_TO_GZ"
+
+- ros_topic_name: "/back_right_wheel_joint_velocity_controller/commands"
+  gz_topic_name: "/model/4wd_robot/joint/back_right_wheel_joint/cmd_vel"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: "ROS_TO_GZ"

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>four_wd_description</name>
+  <name>four_wd_bringup</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
   <maintainer email="mnathau05@gmail.com">muhnatha</maintainer>
@@ -9,12 +9,15 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <depend>ros2_control</depend>
-  <depend>gazebo_ros2_control</depend>
-  <exec_depend>urdf_launch</exec_depend>
+  <exec_depend>four_wd_description</exec_depend>
+  <exec_depend>ros2_controllers</exec_depend>
+  <exec_depend>ros2_control</exec_depend>
+  <exec_depend>controller_manager</exec_depend>
+  <exec_depend>joint_state_broadcaster</exec_depend>
+  <exec_depend>diff_drive_controller</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>
-  <exec_depend>joint_state_publisher_gui</exec_depend>
-  <exec_depend>rviz2</exec_depend>
+  <exec_depend>ros_gz_sim</exec_depend>
+  <exec_depend>ros_gz_bridge</exec_depend>
   <exec_depend>xacro</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>

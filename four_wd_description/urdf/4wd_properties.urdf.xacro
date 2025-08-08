@@ -10,6 +10,9 @@
     <xacro:property name="lidar_radius" value="0.04"/>
     <xacro:property name="lidar_height" value="0.05"/>
 
+    <!-- Argument -->
+    <xacro:arg name="controller_config_path" default=""/>
+
     <!-- #################### LINKS #################### -->
 
     <!-- Base Footprint (at the center of the robot on the ground) -->
@@ -29,7 +32,7 @@
         <collision>
             <origin xyz="0 0 ${base_height/2}" rpy="0 0 0"/>
             <geometry>
-                <box size="${base_length} ${base_width} ${base_height}"/>
+                <box size="${base_length - 0.05} ${base_width} ${base_height - 0.01}"/>
             </geometry>
         </collision>
         <inertial>
@@ -121,36 +124,11 @@
 
     <!-- #################### GAZEBO & ROS2 CONTROL #################### -->
 
-    <!-- ros2_control Controller Manager -->
-    <ros2_control name="GazeboSystem" type="system">
-        <hardware>
-            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
-        </hardware>
-        <joint name="front_left_wheel_joint">
-            <command_interface name="velocity"/>
-            <state_interface name="position"/>
-            <state_interface name="velocity"/>
-        </joint>
-        <joint name="front_right_wheel_joint">
-            <command_interface name="velocity"/>
-            <state_interface name="position"/>
-            <state_interface name="velocity"/>
-        </joint>
-        <joint name="back_left_wheel_joint">
-            <command_interface name="velocity"/>
-            <state_interface name="position"/>
-            <state_interface name="velocity"/>
-        </joint>
-        <joint name="back_right_wheel_joint">
-            <command_interface name="velocity"/>
-            <state_interface name="position"/>
-            <state_interface name="velocity"/>
-        </joint>
-    </ros2_control>
-
     <!-- Lidar Sensor Plugin -->
     <gazebo reference="lidar_link">
         <sensor name="gpu_lidar" type="gpu_lidar">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>true</visualize>
             <topic>/scan</topic>
             <update_rate>10</update_rate>
             <lidar>
@@ -158,16 +136,16 @@
                     <horizontal>
                         <samples>360</samples>
                         <resolution>1</resolution>
-                        <min_angle>-3.14</min_angle>
-                        <max_angle>3.14</max_angle>
+                        <min_angle>-3.14159</min_angle>
+                        <max_angle>3.14159</max_angle>
                     </horizontal>
                 </scan>
                 <range>
                     <min>0.12</min>
                     <max>12.0</max>
+                    <resolution>0.01</resolution>
                 </range>
             </lidar>
-            <visualize>true</visualize>
         </sensor>
     </gazebo>
 
