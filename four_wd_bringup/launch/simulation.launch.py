@@ -12,14 +12,16 @@ def generate_launch_description():
     pkg_four_wd_description = get_package_share_directory('four_wd_description')
     pkg_ros_ign_gazebo = get_package_share_directory('ros_gz_sim')
     pkg_four_wd_bringup = get_package_share_directory('four_wd_bringup')
-    pkg_four_wd_control = get_package_share_directory('four_wd_control')
-
-    # Process the URDF file
+    
+    # Controller config path
+    controller_config_path = os.path.join(pkg_four_wd_bringup, 'config', 'controllers.yaml')
+    
+    # process URDF file
     robot_description_config = xacro.process_file(
         os.path.join(pkg_four_wd_description, 'urdf', '4wd_properties.urdf.xacro'),
+        mappings={'controller_config_path': controller_config_path}
     )
     robot_description = robot_description_config.toxml()
-    
 
     # Launch Gazebo
     gazebo = IncludeLaunchDescription(
@@ -44,6 +46,30 @@ def generate_launch_description():
         arguments=['-string', robot_description, '-name', '4wd_robot'],
         output='screen'
     )
+    
+    # Controller Manager
+    controller_manager = Node(
+        package="controller_manager",
+        executable="ros2_control_node",
+        parameters=[{'robot_description': robot_description, 
+                     'use_sim_time': True},
+                    controller_config_path],
+        output="screen",
+    )
+    
+    # Joint State Broadcaster Spawner
+    joint_state_broadcaster_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+    )
+
+    # Differential Drive Controller Spawner
+    diff_drive_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["diff_drive_controller", "--controller-manager", "/controller_manager"],
+    )
 
     # for ROS2 command
     gz_ros_bridge = Node(
@@ -57,17 +83,13 @@ def generate_launch_description():
         output='screen'
     )
 
-    robot_controller_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(pkg_four_wd_control, 'launch', 'control.launch.py')
-        )
-    )
-
     # The new launch description with event handlers for robust startup
     return LaunchDescription([
         gazebo,
+        gz_ros_bridge,
         robot_state_publisher,
         spawn_entity,
-        gz_ros_bridge,
-        robot_controller_launch
+        controller_manager, 
+        joint_state_broadcaster_spawner, 
+        diff_drive_controller_spawner, 
     ])
