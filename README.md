@@ -2,8 +2,6 @@
 
 This repository contains a complete ROS 2 simulation for a four-wheeled mobile robot, ready for navigation and SLAM tasks. The project uses Gazebo Fortress for realistic physics simulation and `ros2_control` for robust motor control. The robot is equipped with a LiDAR sensor and can be driven using the keyboard. (The navigation and SLAM is still on  progress)
 
-!(https://user-images.githubusercontent.com/25354992/196656752-12563a01-523c-4435-ac0d-3196f7c6e082.png)
-
 ## About The Project
 
 This project provides a ready-to-use simulation environment for a four-wheel differential drive robot. It was built progressively, starting from a basic URDF model and culminating in a fully controllable Gazebo simulation.
