@@ -82,6 +82,16 @@ def generate_launch_description():
         }],
         output='screen'
     )
+    
+    # Keyboard Teleop Node
+    teleop_twist_keyboard_node = Node(
+        package='teleop_twist_keyboard',
+        executable='teleop_twist_keyboard',
+        name='teleop_twist_keyboard',
+        output='screen',
+        prefix='xterm -e',
+        remappings=[('/cmd_vel', '/diff_drive_controller/cmd_vel_unstamped')]
+    )
 
     # The new launch description with event handlers for robust startup
     return LaunchDescription([
@@ -91,5 +101,6 @@ def generate_launch_description():
         spawn_entity,
         controller_manager, 
         joint_state_broadcaster_spawner, 
-        diff_drive_controller_spawner, 
+        diff_drive_controller_spawner,
+        teleop_twist_keyboard_node, 
     ])
