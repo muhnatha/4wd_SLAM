@@ -7,7 +7,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 def generate_launch_description():
     # define pkg_name and path
     pkg_name = 'four_wd_description'
-    file_subpath = 'urdf/4wd_properties.urdf.xacro'
+    file_subpath = 'urdf/robot.urdf.xacro'
 
     # define launch path
     urdf_launch_path = os.path.join(
