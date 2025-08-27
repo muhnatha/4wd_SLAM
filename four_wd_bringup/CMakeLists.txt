@@ -13,7 +13,7 @@ find_package(ament_cmake REQUIRED)
 
 # Install launch config
 install(
-  DIRECTORY launch config
+  DIRECTORY launch config worlds
   DESTINATION share/${PROJECT_NAME}
 )
 

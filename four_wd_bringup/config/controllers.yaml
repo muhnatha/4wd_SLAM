@@ -28,7 +28,7 @@ diff_drive_controller:
 
     # Frame IDs for odometry. These match the defaults and your URDF.
     odom_frame_id: "odom"
-    base_frame_id: "base_link"
+    base_frame_id: "base_footprint"
 
     # Enable publishing the odom -> base_link transform.
     enable_odom_tf: true
