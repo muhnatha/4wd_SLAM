@@ -27,7 +27,7 @@ def generate_launch_description():
     )
     # process URDF file
     robot_description_config = xacro.process_file(
-        os.path.join(pkg_four_wd_description, 'urdf', '4wd_properties.urdf.xacro'),
+        os.path.join(pkg_four_wd_description, 'urdf', 'robot.urdf.xacro'),
         mappings={'controller_config_path': controller_config_path}
     )
     robot_description = robot_description_config.toxml()

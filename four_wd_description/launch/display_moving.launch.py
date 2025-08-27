@@ -13,7 +13,7 @@ def generate_launch_description():
     urdf_path = os.path.join(
         get_package_share_directory('four_wd_description'),
         'urdf',
-        '4wd_properties.urdf.xacro'
+        'robot.urdf.xacro'
     )
     robot_description_config = xacro.process_file(urdf_path)
     robot_description = {'robot_description': robot_description_config.toxml()}
